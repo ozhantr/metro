@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="mt-5"><h3>Login Form</h3></div>
+      <form id="login">
+        <div class="form-group">
+          <label for="login[email]">Email address</label>
+          <input type="email" name="login[email]" id="login[email]" class="form-control" placeholder="Enter email" minlength="5" maxlength="60" required>
+        </div>
+        <div class="form-group">
+          <label for="login[password]">Password</label>
+          <input type="password" name="login[password]" id="login[password]" class="form-control" placeholder="Password" minlength="6" maxlength="20" required>
+        </div>
+        <div class="alert alert-warning d-none" id="alert" role="alert"></div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  
+    <script>
+      $('#login').submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+          type: "POST",
+          url: '/login/auth',
+          data: $(this).serialize(),
+        })
+        .done(function(result) {
+          var objData = JSON.parse(JSON.stringify(result));
+          if (objData.error.status == true) {
+            $('#alert').text(objData.error.description).removeClass('d-none');
+            $('#login[password]').val("");
+          } else {
+            window.location.href = objData.data.url;
+          }
+          
+        })
+        .fail(function(result) {
+          console.log(result);
+        });
+      });
+    </script>
+  </body>
+</html>
