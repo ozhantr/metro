@@ -18,6 +18,7 @@ SQL Structure & Data Fixtures
 
 - `Browser:` http://localhost
 - `All users passwords:` 123456
+- `Admin user email:` ozhantr@hotmail.com
 
 Auto Generated Doc
 ---
