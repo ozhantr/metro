@@ -12,6 +12,7 @@ How to set up
 
 SQL Structure & Data Fixtures
 ---
+- `DB Name:` test_app
 - You need to run SQL File
 - guestbook.sql
 
@@ -35,8 +36,6 @@ MySQL
 `USER:`test
 
 `PASSWORD:` test
-
-`TABLE:` test_app
 
 `PORT:` 3306
 
